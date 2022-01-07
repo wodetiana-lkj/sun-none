@@ -1,5 +1,5 @@
-*/.idea
-*/.vscode
+.idea
 
-*/bin/
-*/pkg/
+go/GoProject/.vscode/
+go/GoProject/bin/
+go/GoProject/pkg/
