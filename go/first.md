@@ -9,8 +9,8 @@ go env -w GO111MODULE=o
 # 2.安装插件
 
 ```cmd
-go get -u github.com/ramya-rao-a/go-outline
+go get -v github.com/ramya-rao-a/go-outline
 GO111MODULE=on 
-go get golang.org/x/tools/gopls@latest
+go get -v golang.org/x/tools/gopls
+go get -v github.com/go-delve/delve/cmd/dlv
 ```
-
