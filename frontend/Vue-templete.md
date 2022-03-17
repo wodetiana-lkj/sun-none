@@ -36,11 +36,16 @@ unmounted()
 
 ![实例的生命周期](https://v3.cn.vuejs.org/images/lifecycle.svg)
 
-[直接写渲染 (render) 函数](https://v3.cn.vuejs.org/guide/render-function.html)，使用可选的 JSX 语法。?这一部需要了解
-
 v-once可以限定一次性插值
 
 v-html对html文本重新渲染
 
 对Mustache表达式的js表达式的支持进行尝试书写
+
+```vue
+{{message + 1}}
+{{message?true:false}}
+{{message.split('').reverse().join('')}}
+{{<div v-bind:id="'list-' + id"></div><div v-bind:id="'list-' + id"></div>}}
+```
 
