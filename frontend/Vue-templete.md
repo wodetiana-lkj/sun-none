@@ -47,5 +47,6 @@ v-html对html文本重新渲染
 {{message?true:false}}
 {{message.split('').reverse().join('')}}
 {{<div v-bind:id="'list-' + id"></div><div v-bind:id="'list-' + id"></div>}}
+v-bind:[]=""//动态设置attribute值，[]中为javascript表达式
+//动态的attribute值大小写不区分，不能使用''等拼接，仅可以访问有限的全局变量表不能访问用户定义的全局变量
 ```
-
