@@ -1,4 +1,4 @@
-## 安装
+# 安装
 
 1. script安装
 2. npm安装以及其脚手架
@@ -6,6 +6,17 @@
 ```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 ```
+
+# vue实例成员变量
+
+| name     | description                            | type   |
+| -------- | -------------------------------------- | ------ |
+| el       | 绑定标签                               | string |
+| data     | 绑定数据                               | object |
+| computed | 属性计算，和数据绑定                   | object |
+| methods  | 类似于computed但是不会随着绑定数据更新 | object |
+
+//todo 这里需要注意computed、methods、watch三种不同的方式在更新渲染时做出的反应和更新数据时的反应
 
 # vue基本语法
 
