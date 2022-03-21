@@ -9,14 +9,13 @@
 
 # vue实例成员变量
 
-| name     | description                            | type   |
-| -------- | -------------------------------------- | ------ |
-| el       | 绑定标签                               | string |
-| data     | 绑定数据                               | object |
-| computed | 属性计算，和数据绑定                   | object |
-| methods  | 类似于computed但是不会随着绑定数据更新 | object |
-
-//todo 这里需要注意computed、methods、watch三种不同的方式在更新渲染时做出的反应和更新数据时的反应
+| name     | description                                                  | type   |
+| -------- | ------------------------------------------------------------ | ------ |
+| el       | 绑定标签                                                     | string |
+| data     | 绑定数据                                                     | object |
+| computed | 属性计算，和数据绑定                                         | object |
+| methods  | 类似于computed，但是每次刷新都需要重新计算，而computed只相应缓存值 | object |
+| watch    | 类似computed，但是一般用于异步操作axios访问api和访问限制，这是computed做不到的 | object |
 
 # vue基本语法
 
@@ -36,7 +35,15 @@
 
 ### v-if
 
+搭配v-else、v-else-if
+
 绑定attribute表显示
+
+v-for具有更高的优先级，不建议一起使用
+
+### v-show
+
+相比v-if不支持templete，仅支持标签，始终渲染更变display值
 
 ### v-on
 
@@ -51,14 +58,18 @@
 迭代数组，显示列表
 
 ```vue
-<ul v-for="(item,index) in lists">
+//注意vue提供了key值跟踪状态
+<ul v-for="(item,index) in lists" v-bind:key="item.id">
     <li style="list-style-type:none;">index:{{index}},value:{{item}}</li>
 </ul>
+
+//v-for迭代遍历k-v
+<li v-for="(value,name,index) in obj"></li>
 ```
 
+### v-model
 
-
-
+表单双向数据绑定
 
 语法中同样支持基础的javascript语法，但是仅为表达式而非语句
 
