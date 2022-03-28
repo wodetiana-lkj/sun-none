@@ -1,4 +1,2 @@
 # sun-none
 operating
-
-、test、
