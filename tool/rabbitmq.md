@@ -6,20 +6,25 @@ wx-Widgets
 
 ```
 yum install -y  ncurses-devel
+./configure --enable-compat28
 ```
 
 安装server
 
 安装前端
 
-```shell
-rabbitmqctl add_user admin Lkj19981013.
+```bash
+rabbitmq-plugins enable rabbitmq_management
+```
 
-rabbitmqctl set_user_tags admin administrator
+```shell
+rabbitmqctl add_user liukangjie Lkj19981013.
+
+rabbitmqctl set_user_tags liukangjie administrator
 
 set_permissions
 
-rabbitmq set_permissions -p "/" ".*" ".*" ".*"
+rabbitmqctl set_permissions liukangjie ".*" ".*" ".*"
 rabbitmqctl list_users 
 ```
 
