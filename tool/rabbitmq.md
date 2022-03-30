@@ -1,21 +1,29 @@
-安装erlang
+# 安装erlang
 
-jdk
+jdk环境
 
-wx-Widgets
+wx-Widgets环境
 
 ```
 yum install -y  ncurses-devel
 ./configure --enable-compat28
 ```
 
-安装server
+# 安装server
 
-安装前端
+```shell
+rpm -ivh rabbitmq-server.rpm
+```
+
+# 安装前端
+
+安装插件
 
 ```bash
 rabbitmq-plugins enable rabbitmq_management
 ```
+
+添加账号、角色、权限
 
 ```shell
 rabbitmqctl add_user liukangjie Lkj19981013.
@@ -27,6 +35,8 @@ set_permissions
 rabbitmqctl set_permissions liukangjie ".*" ".*" ".*"
 rabbitmqctl list_users 
 ```
+
+# client使用
 
 declare queue
 
