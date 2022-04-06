@@ -105,3 +105,30 @@ channel.basicConsume(
 );
 ```
 
+## 持久化durable
+
+1. 需要持久化的队列，declare队列时就需要
+2. 其次需要持久化的消息，持久化到硬盘中，在publish时设置对应的properties参数
+
+## 手动返回ack
+
+```java
+channel.basicConsume(
+        "durable_queue",
+        false,
+        "",
+        (consumerTag, message) -> {
+            System.out.println(consumerTag);
+            System.out.println(new String(message.getBody()));
+            channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
+        },
+        (consumerTag) -> {
+            System.out.println("拒绝策略");
+        }
+);
+```
+
+设置autoAck
+
+通过channel.basic()响应队列Ack值
+
