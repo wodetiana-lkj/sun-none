@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./dist/vue2.js"></script>
+</head>
+
+<body>
+    <button id="app">hah</button>
+
+    <script>
+        var node = document.getElementById("app")
+        node.addEventListener('click', function () {
+            console.log('123');
+            websocketsend('123')
+        })
+
+
+        var websock = null;
+        var global_callback = null;
+
+        var lockReconnect = false;
+        var timeout = 100 * 1000;
+        var timeoutObj = null;
+        var serverTimeoutObj = null;
+        var timeoutnum = null;
+
+
+        function initWebSocket() { //初始化weosocket
+            //ws地址
+            var wsuri = "ws://192.168.2.72:8060/myWs/" + 'userId'
+            websock = new WebSocket(wsuri);
+            websock.onmessage = function (e) {
+                websocketonmessage(e);
+            }
+            websock.onclose = function (e) {
+                websocketonClose(e);
+            }
+            websock.onopen = function () {
+                websocketonOpen();
+            }
+
+            //连接发生错误的回调方法
+            websock.onerror = function (e) {
+                websocketonError(e)
+            }
+            // sendSock(JSON.stringify({projectId:this.projectId}));
+        }
+
+        // 实际调用的方法
+        function sendSock(agentData, callback) {
+            console.log("send", agentData);
+            global_callback = callback;
+            if (websock.readyState === websock.OPEN) {
+                //若是ws开启状态
+                websocketsend(agentData)
+            } else if (websock.readyState === websock.CONNECTING) {
+                // 若是 正在开启状态，则等待1s后重新调用
+                setTimeout(function () {
+                    sendSock(agentData, callback);
+                }, 1000);
+            } else {
+                // 若未开启 ，则等待1s后重新调用
+                // setTimeout(function () {
+                //   sendSock(agentData, callback);
+                // }, 1000);
+            }
+        }
+
+
+
+        //数据发送
+        function websocketsend(agentData) {
+            websock.send(agentData)
+            // websock.send(JSON.stringify(agentData))
+
+        }
+        //数据接收
+        function websocketonmessage(e) {
+            reset()
+            var data = JSON.parse(e.data)
+            console.log("socket", data);
+            if (store.state.project.projectId) {
+                ElMessage({
+                    type: 'success',
+                    message: '数据已更新',
+                })
+                store.commit("project/handleProjectSet", data.project)
+                store.commit("project/handleTaskSet", data.task)
+                store.commit("project/handleSingleProjectTaskSet", data.taskProject)
+                store.commit("project/handleVersionSet", data.version)
+            } else {
+                store.commit("project/handleProjectSet", data.project)
+                store.commit("project/handleTaskSet", data.task)
+            }
+        }
+        //关闭
+        function websocketonClose(e) {
+            console.log("connection closed (" + e.code + ")");
+            reconnect();
+        }
+
+        function websocketonOpen(e) {
+            console.log("连接成功");
+            start()
+        }
+
+        function websocketonError(e) {
+            console.log("连接错误：" + e.code);
+            reconnect();
+        }
+
+        function closeWebSocket() {
+            websock.close();
+        }
+
+        function reconnect() {
+            if (lockReconnect) {
+                return;
+            };
+            lockReconnect = true;
+            //没连接上会一直重连，设置延迟避免请求过多
+            timeoutnum && clearTimeout(timeoutnum);
+            timeoutnum = setTimeout(function () {
+                //新连接
+                initWebSocket()
+                lockReconnect = false;
+            }, 5000);
+
+        }
+
+        function reset() {//重置心跳
+            //清除时间
+            clearTimeout(timeoutObj);
+            clearTimeout(serverTimeoutObj);
+            //重启心跳
+            start();
+        }
+
+        function start() {//开启心跳
+            console.log("START");
+            timeoutObj && clearTimeout(timeoutObj);
+            serverTimeoutObj && clearTimeout(serverTimeoutObj);
+            timeoutObj = setTimeout(function () {
+                //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                if (websock.readyState === websock.OPEN) {//如果连接正常
+                    sendSock(JSON.stringify({ status: "heartBeat" }));
+                } else {//否则重连
+                    reconnect();
+                }
+                serverTimeoutObj = setTimeout(function () {
+                    //超时关闭
+                    websock.close();
+                }, timeout);
+
+            }, timeout)
+        }
+        initWebSocket();
+
+
+    </script>
+</body>
+
+</html>
