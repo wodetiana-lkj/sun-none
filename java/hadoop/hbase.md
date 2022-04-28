@@ -1,15 +1,3 @@
-1.解析xml 理解fieldName和schema即xsd文件，有一个demo分支以供参考
-
- https://github.com/JabRef/jabref/tree/citavixml
-
-2.创建一个导入者给citavi的xml文件，最好是整个压缩文件进行解析
-
-3.创建citavi和bibtex的映射，这个参考biblatex的字段指南
-
-4.单元测试和集成测试
-
-
-
 node1 192.168.2.179
 
 node2 192.168.2.190
@@ -86,7 +74,7 @@ hadoop-daemon.sh start namenode
 
 hadoop-daemon.sh start datanode
 
-
+50070端口查看数据节点启动情况
 
 # hbase
 
@@ -131,6 +119,12 @@ jdk1.7的注释掉
 </property>
 ```
 
+tzselect选择时区
 
+/etc/profile 
 
-时间同步很重要
+export TZ=Asia/Shanghai
+
+更新时间
+
+ntpdate ntp1.aliyun.com
