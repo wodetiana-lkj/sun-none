@@ -125,6 +125,10 @@ jdk1.7的注释掉
 	<name>hbase.zookeeper.property.dataDir</name>
     <value>/data/zookeeper/</value>
 </property>
+<property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+</property>
 ```
 
 
