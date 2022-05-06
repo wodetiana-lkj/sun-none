@@ -1,0 +1,40 @@
+# 安装
+
+```shell
+# 卸载旧版本docker
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+sudo yum install -y yum-utils
+# 增加docker的yum镜像
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum-config-manager --disable docker-ce-nightly
+
+# 安装docker客户端、服务端和docker-compose
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# 查询相关docker版本
+yum list docker-ce --showduplicates | sort -r
+```
+
+# 设置docker镜像加速器
+
+```shell
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["http://hub-mirror.c.163.com","https://docker.mirrors.ustc.edu.cn","https://8mcnxf6j.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
