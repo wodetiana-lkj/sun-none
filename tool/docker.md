@@ -40,18 +40,17 @@ sudo systemctl restart docker
 
 ### 国内加速地址
 
-1.[Docker](https://so.csdn.net/so/search?q=Docker&spm=1001.2101.3001.7020)中国区官方镜像
- https://registry.docker-cn.com
+1. 中国区官方镜像
+    https://registry.docker-cn.com
 
-2.网易
- http://hub-mirror.c.163.com
+2. 网易
+    http://hub-mirror.c.163.com
 
-3.ustc 
- https://docker.mirrors.ustc.edu.cn
+3. ustc 
+    https://docker.mirrors.ustc.edu.cn
 
-4.中国科技大学
- https://docker.mirrors.ustc.edu.cn
+4. 中国科技大学
+    https://docker.mirrors.ustc.edu.cn
 
-5.阿里云容器 生成自己的加速地址
+# DockerFile
 
-登录：cr.console.aliyun.com
