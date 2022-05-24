@@ -7,7 +7,12 @@ wx-Widgets环境
 ```
 yum install -y  ncurses-devel
 ./configure --enable-compat28
+yum install openssl openssl-devel -y
+yum install unixODBC.x86_64 unixODBC-devel.x86_64 -y
+yum install -y gtk2.x86_64 gtk2-devel.x86_64
 ```
+
+![image-20220520101524358](C:\Users\LIUKANGJIE\AppData\Roaming\Typora\typora-user-images\image-20220520101524358.png)
 
 # 安装server
 
