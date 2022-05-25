@@ -54,23 +54,42 @@ sudo systemctl restart docker
 
 # 构建镜像
 
+
+
 ## commit构建镜像
 
 1. docker run images:tag
 2. apt install net-tools vim -y
 3. docker commit containerId
 
+
+
 ## DockerFile构建镜像
 
 docker build
 
+
+
 ### FROM
 
-FROM image:tag	基于的镜像
+基于的镜像
+
+```dockerfile
+FROM image:tag	
+```
+
+
 
 ### MAINTAINER
 
 镜像创建者和邮箱地址
+
+```dockerfile
+MAINTAINER ["name","email"]
+MAINTAINER liukangjie<wodetiana_lkj@163.com>
+```
+
+
 
 ### RUN
 
@@ -85,6 +104,8 @@ RUN yum install -y net-tools
 RUN ['yum','install -y','net-tools']
 ```
 
+
+
 ### WORKDIR
 
 指定容器入口目录
@@ -92,6 +113,8 @@ RUN ['yum','install -y','net-tools']
 ```dockerfile
 WORKDIR /opt
 ```
+
+
 
 ### ENV
 
@@ -101,9 +124,13 @@ WORKDIR /opt
 ENV JAVA_HOME /usr/local/jdk1.8_u333
 ```
 
+
+
 ### VOLUME
 
 容器卷
+
+
 
 ### COPY
 
@@ -113,15 +140,19 @@ ENV JAVA_HOME /usr/local/jdk1.8_u333
 COPY ["src","destination"]
 ```
 
+
+
 ### ADD
 
 拷贝文件到镜像中，自动处理URL和解压tar压缩包
 
 ```dockerfile
-ADD
+ADD jdk-8u333-linux-x64.tar.gz /usr/local/jdk/
 ```
 
 **此处和 COPY 命令对比，多了解压和执行sh脚本等功能**
+
+
 
 ### CMD
 
@@ -129,9 +160,12 @@ ADD
 
 ```dockerfile
 CMD ["exec filename","args..."]
+CMD catalina.sh run
 ```
 
 **允许多个命令，只有最后一个生效，docker run 的参数会替换它**
+
+
 
 ### EXPOSE
 
@@ -141,6 +175,8 @@ CMD ["exec filename","args..."]
 EXPOSE 8080
 ```
 
+
+
 ### ENTRYPOINT
 
 作为指定的执行脚本，类似CMD但是不会被覆盖
@@ -148,5 +184,13 @@ EXPOSE 8080
 ```dockerfile
 ENTRYPOINT ["nginx","-c"] # 定参
 CMD ["/etc/nginx/nginx.conf"] # 需要传入的参数 
+```
+
+
+
+> 此时通过命令行完成了构建镜像
+
+```shell
+docker build -t image:tag path
 ```
 
