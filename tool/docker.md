@@ -194,3 +194,39 @@ CMD ["/etc/nginx/nginx.conf"] # 需要传入的参数
 docker build -t image:tag path
 ```
 
+
+
+# Docker-compose 容器编排
+
+```yaml
+# 版本
+version: "3"
+
+services:
+	microService:
+		image: "image_name:tag"
+		container_name: "container_name"
+		ports:
+		  - "8080:8080"
+		  - "3306:3306"
+		volumes:
+		  - /data/logs:/data
+		networks:
+		  - one_of_networks
+		depends_on:
+		  - redis
+		  - mysql
+		command: redis-server /etc/redis/redis.conf --default-authentication-plugin=mysql_native_password
+		environment:
+		  MYSQL_ROOT_PASSWORD: '123456'
+		  MYSQL_ALLOW_EMPTY_PASSWORD: 'NO'
+		  MYSQL_DATABASE: 'DB2022'
+		  MYSQL_USER: 'LIUKANGJIE'
+		  MYSQL_PASSWORD: '123456'
+		  
+networks: 
+	one_of_networks:
+```
+
+
+
