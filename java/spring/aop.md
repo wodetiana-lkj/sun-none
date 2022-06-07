@@ -63,6 +63,7 @@ public @interface GetParam {
 
 ```java
 @Pointcut			//切点
+
 @Before				//切点前
 @After				//切点后的结果操作
 @Around				//切点环绕
@@ -88,3 +89,20 @@ AfterReturning,AfterThrowing
 | returning/throwing | String |      |
 | argNames           | String |      |
 
+# 3.example
+
+```java
+//建立pointcut
+
+/*
+value定义
+execution执行环境
+权限+返回类型(可以用*)+包名+.+类+.+方法+.+(入参类型)
+*/
+
+//使用切点
+
+//其中相对特殊的是around
+//可以使用ProceedingJointPoint
+//其他使用JointPoint
+```
