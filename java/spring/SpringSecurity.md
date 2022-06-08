@@ -1,4 +1,4 @@
-# 初入SpringSecurity
+# 认证
 
 ```xml
 <!-- 引入依赖 -->
@@ -104,3 +104,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
+## 配置登录授权与跳转
+
+1. 继承 **WebSecurityConfiguerAdapter** 类
+2. 重写 **configure(HttpSecurity http)** 方法
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http.formLogin()
+        .loginPage("https://baidu.com")	//登录url
+        .loginProcessingUrl("/user/login")	//
+        .defaultSuccessUrl("/test/hello")	//登录成功跳转url
+        .permitAll()
+        .and().authorizeRequests()
+        .antMatchers("/").permitAll()
+        .anyRequest().authenticated()
+        .and().csrf().disable();
+}
+```
+
+# 授权
+
+在http中各种api的调用配置登陆登出权限验证等等
+
+
+
+# 注解开发
