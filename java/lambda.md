@@ -109,7 +109,7 @@ comparable , compareTo <0 -1 =0 0 >0 1 默认从小到大排序
 1. reduce(T t,BinaryOperator bo)
 2. reduce(BinaryOperator bo)
 
-初始值和规约操作
+初始值和归约操作
 
 ### 收集
 
