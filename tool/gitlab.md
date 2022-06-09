@@ -12,6 +12,21 @@ vim /etc/gitlab/gitlab.rb file
 
 sudo gitlab-ctl reconfigure
 
+
+
+安装gitlab-runner
+
+查询3种类型
+
+shared group specific
+
+token
+
+注册到gitlab
+
+gitlab-runner register
+
+
 # gitlab runner
 
 ## job
@@ -39,4 +54,8 @@ variables:
 	DOMAIN: "www.baidu.com"
 ```
 
-​	
+
+
+
+
+
