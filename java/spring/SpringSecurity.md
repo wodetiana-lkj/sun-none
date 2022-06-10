@@ -131,3 +131,33 @@ protected void configure(HttpSecurity http) throws Exception {
 
 
 # 注解开发
+
+```java
+//开启注解
+@EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled)
+
+//设置方法角色权限
+@Secured({"ROLE_user","ROLE_root","ROLE_admin"})
+
+//执行前鉴权
+@PreAuthorize("hasAnyAuthrity('menu:system')")
+
+//执行后鉴权
+@PostAuthorize("hasAnyAuthrity('menu:system')")
+
+//入参和回参过滤
+@PreFilter @PostFilter
+```
+
+# 登出
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http.logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login")
+        .permitAll();
+}
+```
+
