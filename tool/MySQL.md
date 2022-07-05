@@ -11,7 +11,7 @@ docker run -d \
 	-v /data/mysql-master/conf.d:/etc/mysql/conf.d \
 	-v /data/mysql-master/datadir:/var/lib/mysql \
 	-p 10000:3306 \
-	-e MYSQL_ROOT_PASSWORD=Lkj19981013. \
+	-e MYSQL_ROOT_PASSWORD= \
 	b2500a44757f
 ```
 
@@ -38,7 +38,7 @@ docker run -d \
         -v /data/mysql-slave/conf.d:/etc/mysql/conf.d \
         -v /data/mysql-slave/datadir:/var/lib/mysql \
         -p 10001:3306 \
-        -e MYSQL_ROOT_PASSWORD=Lkj19981013. \
+        -e MYSQL_ROOT_PASSWORD= \
         b2500a44757f
 ```
 
