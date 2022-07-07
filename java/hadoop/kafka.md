@@ -12,6 +12,17 @@ delete.topic.enable=true
 
 brocker.id 、zk 、logs_path进行设置
 
+```shell
+docker run -d --name zookeeper_1 \
+        -p 2181:2181 \
+        -p 2888:2888 \
+        -p 3888:3888 \
+        -v /data/zookeeper1/data:/data \
+        -v /data/zookeeper1/conf:/conf \
+        --restart=always \
+        53bd045d4a25
+```
+
 
 
 # topic
@@ -38,5 +49,7 @@ brocker.id 、zk 、logs_path进行设置
 
 # old version can connect by zk
 ./kafka-console-consumer.sh --topic first --zookeeper localhost:2181 --from-begining
+# new version need kafka server
+./kafka-console-consumer.sh --topic test --bootstrap-server localhost:9092 --from-beginning
 ```
 
