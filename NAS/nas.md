@@ -124,7 +124,3 @@ openmediavault中，分成了条带、镜像、线性、RAID5、RAID6、RAID10
 - RAID5至少需要三块磁盘，将冗余数据分别存在各个磁盘，损坏一块直接更换
 - RAID10，不应称呼为"RAID十"，应该是"RAID1 0"，=RAID1 + RAID0
 
-
-
-
-

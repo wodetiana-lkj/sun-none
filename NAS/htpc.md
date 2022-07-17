@@ -22,8 +22,3 @@ emby体系下即emby enterprise和jellyfin
 
 
 
-# Transmission
-
-谈到htpc，就不得不的谈到资源的下载和pt网站，资源下载和保种
-
-transmission是linux下轻量级的bt下载器
